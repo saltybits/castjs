@@ -42,4 +42,14 @@ describe("date extension", function() {
   it("sorts", function() {
     expect( handler.sort(["2011-01-13", "1983-03-25", "1984-01-24"]) ).toEqual(["1983-03-25", "1984-01-24", "2011-01-13"]);
   });
+  
+  describe("filter", function() {
+    it("works", function() {
+      var now = moment();
+      var dates = ["Jan 13, 2011", "01/24/1984", "1983-03-25"];
+      var results = handler.filter(dates, function(moment) { return now.diff(moment, 'years') < 10; });
+      
+      expect( results ).toEqual(["Jan 13, 2011"])
+    });
+  });
 });

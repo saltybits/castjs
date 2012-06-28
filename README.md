@@ -38,7 +38,23 @@ currency.filter(...)
 
 **sort**
 ```
-Cast.sort(["0.1", "19.83", "13.24"], "float")
+Cast.as("float").sort(["0.1", "19.83", "13.24"])
+
+### Leveraging underscore.js
+
+Cast.js has a number of utility functions for working with lists of values, courtesy of [underscore](http://underscorejs.org/).
+Simply include underscore.js before including cast.js to enable them.
+
+```
+// the "date" type is built on top of `moment.js`
+var now = moment();
+var dates = ["Jan 13, 2011", "01/24/1984", "1983-03-25"]; // note how we don't have to worry about the format of the date
+
+Cast.as("date").filter(dates, function(moment) { return now.diff(moment, 'years') < 10; }); // => ["Jan 13, 2011"]
+```
+
+The following underscore methods are supported:
+`each` `map` `find` `filter` `reject` `all` `any` `max` `min` `sortBy` 
 
 ### Adding your own data types
 ```
