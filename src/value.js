@@ -121,10 +121,6 @@
     return new Handler(type, get(type));
   }
   
-  // parse is the only method that allows type to be inferred
-  function parse(string, type) {
-    return definition(string, type).parse(string);
-  }
   
   // utility methods
   function merge(defaults, options) {
