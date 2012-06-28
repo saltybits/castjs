@@ -27,4 +27,8 @@ describe("ValueJS.define", function() {
       expect( ValueJS.get('number').compare ).toEqual(ValueJS.defaults.compare);
     });
   });
+  
+  it("returns the newly defined handler", function() {
+    expect( ValueJS.define('test', {}) ).toEqual( ValueJS.as('test') )
+  });
 });

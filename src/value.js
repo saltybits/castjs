@@ -2,19 +2,17 @@
   var REGISTRY = {};
   
   function define(type, definition) {
-    // provide default implementations for missing methods
-    var methods = ['validate', 'parse', 'format', 'compare'];
+    // provide default implementations for missing fields/methods
+    var fields = ['defaults', 'validate', 'parse', 'format', 'compare'];
     
-    for (var ndx = 0; ndx < methods.length; ndx++) {
-      var method = methods[ndx];
-      definition[method] = definition[method] || ValueJS.defaults[method]
+    for (var ndx = 0; ndx < fields.length; ndx++) {
+      var field = fields[ndx];
+      definition[field] = definition[field] || ValueJS.defaults[field];
     }
     
     REGISTRY[type] = definition;
     
-    // could return definition here but would rather discourage
-    // direct use of the definition in favor of the API
-    // return definition;
+    return as(type);
   }
   
   function get(type) {
@@ -49,8 +47,10 @@
   
   // return the implied type of the value based on the registered type definitions and
   // the given precedence
+  //
+  // public exposed as #typeOf
   function identify(string, precedence) {
-    return find(precedence, function(type) { return valid(string, type); });
+    return find(precedence, function(type) { return type.valid(string); });
   }
   
   function find(precedence, iterator) {
@@ -61,8 +61,9 @@
     
     for (var ndx = 0; ndx < precedence.length; ndx++) {
       var type = precedence[ndx];
+      var handler = as(type);
       
-      if (iterator(type)) {
+      if (iterator(handler)) {
         result = type;
         break;
       }
@@ -71,21 +72,53 @@
     return result;
   }
   
-  function valid(string, type) {
-    return typeof validate(string, type) == "undefined";
+  function Handler(type, definition) {
+    this.type = type;
+    this.definition = definition;
   }
   
-  function validate(string, type) {
-    var def = definition(string, type);
-
-    if (def.validate) {
-      if (def.validate instanceof RegExp) {
-        if (!string.match(def.validate))
-          return ValueJS.invalid;
-      } else {
-        return def.validate(string);
-      }
+  Handler.prototype.validate = function(string) {
+    var errors,
+        validate = this.definition.validate;
+    
+    if (validate instanceof RegExp) {
+      if (!string.match(validate))
+        errors = ValueJS.invalid;
+    } else {
+      errors = validate(string);
     }
+    
+    return errors;
+  }
+  
+  // #validate can return error specifics while #valid only returns true or false
+  Handler.prototype.valid = function(string) {
+    return typeof this.validate(string) == "undefined";
+  }
+  
+  Handler.prototype.parse = function(string) {
+    return this.definition.parse(string);
+  }
+  
+  Handler.prototype.format = function(value, options) {
+    return this.definition.format(value, merge(this.definition.defaults, options));
+  }
+  
+  Handler.prototype.massage = function(string, options) {
+    return this.format(this.parse(string), options);
+  }
+  
+  Handler.prototype.compare = function(a, b) {
+    return this.definition.compare(this.parse(a), this.parse(b));
+  }
+  
+  Handler.prototype.sort = function(array, type) {
+    var self = this;
+    return array.sort(function(a, b) { return self.compare(a, b); });
+  }
+  
+  function as(type) {
+    return new Handler(type, get(type));
   }
   
   // parse is the only method that allows type to be inferred
@@ -93,19 +126,7 @@
     return definition(string, type).parse(string);
   }
   
-  function format(value, type, options) {
-    var def = get(type);
-    
-    options = merge(def.defaults, options);
-    
-    return def.format(value, options);
-  }
-  
-  function massage(string, type, options) {
-    var value = parse(string, type);
-    return format(value, type, options);
-  }
-  
+  // utility methods
   function merge(defaults, options) {
     var result = {};
     
@@ -117,25 +138,18 @@
     }
     
     for (var attr in defaults) {
-      if (!result.hasOwnProperty(attr))
+      if (result[attr] == null)
         result[attr] = defaults[attr]; 
     }
     
     return result;
   }
   
-  function compare(a, b, type) {
-    var def = get(type);
-    return def.compare(def.parse(a), def.parse(b));
-  }
-  
-  function sort(array, type) {
-    return array.sort(function(a, b) { return compare(a, b, type) });
-  }
   
   // define our public API
   var ValueJS = {
     defaults: {
+      defaults: {},
       parse:    function(string) { return string; },
       validate: function(string) { return; },
       compare:  function(a, b) { return String(a) - String(b); },
@@ -148,14 +162,9 @@
     invalid: true,
     
     define: define,
-    get: get,
-    identify: identify,
-    validate: validate,
-    parse: parse,
-    format: format,
-    massage: massage,
-    compare: compare,
-    sort: sort
+    get: get, // not sure this needs to be exposed anymore
+    as: as,
+    typeOf: identify,
   };
   
   // export the library
