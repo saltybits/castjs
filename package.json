@@ -1,0 +1,15 @@
+{
+  "name": "value.js",
+  "version": "0.0.1",
+  "description": "A tiny javascript library for validating, parsing, sorting, and displaying formatted values.",
+  "main": "value.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/saltybits/value.js.git"
+  },
+  "keywords": [
+    "util value parse validate compare sort format"
+  ],
+  "author": "Ryan Mohr <ryan@saltybits.co>",
+  "license": "MIT"
+}
