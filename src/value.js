@@ -94,7 +94,34 @@
   }
   
   function format(value, type, options) {
-    return get(type).format(value, options);
+    var def = get(type);
+    
+    options = merge(def.defaults, options);
+    
+    return def.format(value, options);
+  }
+  
+  function massage(string, type, options) {
+    var value = parse(string, type);
+    return format(value, type, options);
+  }
+  
+  function merge(defaults, options) {
+    var result = {};
+    
+    defaults = defaults || {};
+    options = options || {};
+    
+    for (var attr in options) {
+      result[attr] = options[attr];
+    }
+    
+    for (var attr in defaults) {
+      if (!result.hasOwnProperty(attr))
+        result[attr] = defaults[attr]; 
+    }
+    
+    return result;
   }
   
   function compare(a, b, type) {
@@ -126,6 +153,7 @@
     validate: validate,
     parse: parse,
     format: format,
+    massage: massage,
     compare: compare,
     sort: sort
   };
