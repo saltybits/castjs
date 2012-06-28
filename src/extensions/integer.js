@@ -3,7 +3,6 @@
     validate: /^[+-]?\d+$/,
   
     parse: function(string) {
-      console.log("integer parsing", string, Number(string));
       return Number(string);
     },
     

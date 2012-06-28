@@ -21,8 +21,6 @@ describe("validate", function() {
       spyOn(handler.definition, "validate");
       handler.validate(string);
       
-      console.log("spied handler is", handler.definition.validate);
-      
       expect( handler.definition.validate ).toHaveBeenCalledWith(string);
     });
     

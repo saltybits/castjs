@@ -118,24 +118,58 @@
   }
   
   if (typeof _ != "undefined") {
-    Handler.prototype.each = function(list, iterator, context) {
-      var self = this;
-      
-      var _iterator = function(value, key, list) {
-        return iterator.call(context, self.parse(value), key, list);
+    function _iterator(handler, iterator, context) {
+      return function(value, key, list) {
+        var parsedValue = handler.parse(value);
+        
+        if (iterator) {
+          return iterator.call(context, parsedValue, key, list);
+        } else {
+          return parsedValue;
+        }
       };
-      
-      return _.each(list, _iterator, context);
+    }
+    
+    // lots of duplication here
+    // could get fancy and define these dynamically but this is much easier to maintain
+    Handler.prototype.each = function(list, iterator, context) {
+      return _.each(list, _iterator(this, iterator, context), context);
+    }
+    
+    Handler.prototype.map = function(list, iterator, context) {
+      return _.map(list, _iterator(this, iterator, context), context);
+    }
+    
+    Handler.prototype.find = function(list, iterator, context) {
+      return _.find(list, _iterator(this, iterator, context), context);
     }
     
     Handler.prototype.filter = function(list, iterator, context) {
-      var self = this;
-      
-      var _iterator = function(value, key, list) {
-        return iterator.call(context, self.parse(value), key, list);
-      };
-      
-      return _.filter(list, _iterator, context);
+      return _.filter(list, _iterator(this, iterator, context), context);
+    }
+    
+    Handler.prototype.reject = function(list, iterator, context) {
+      return _.reject(list, _iterator(this, iterator, context), context);
+    }
+    
+    Handler.prototype.all = function(list, iterator, context) {
+      return _.all(list, _iterator(this, iterator, context), context);
+    }
+    
+    Handler.prototype.any = function(list, iterator, context) {
+      return _.any(list, _iterator(this, iterator, context), context);
+    }
+    
+    Handler.prototype.max = function(list, iterator, context) {
+      return _.max(list, _iterator(this, iterator, context), context);
+    }
+    
+    Handler.prototype.min = function(list, iterator, context) {
+      return _.min(list, _iterator(this, iterator, context), context);
+    }
+    
+    Handler.prototype.sortBy = function(list, iterator, context) {
+      return _.sortBy(list, _iterator(this, iterator, context), context);
     }
   }
   
