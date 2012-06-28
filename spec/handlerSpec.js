@@ -3,7 +3,7 @@ describe("Handler", function() {
       definition;
   
   beforeEach(function() {
-    ValueJS.define("foobar", {
+    Cast.define("foobar", {
       defaults: {},
       
       parse: function(string) {
@@ -19,7 +19,7 @@ describe("Handler", function() {
       }
     });
     
-    handler = ValueJS.as("foobar");
+    handler = Cast.as("foobar");
     definition = handler.definition;
   });
   

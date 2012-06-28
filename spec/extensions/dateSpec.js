@@ -2,7 +2,7 @@ describe("date extension", function() {
   var handler;
   
   beforeEach(function() {
-    handler = ValueJS.as("date");
+    handler = Cast.as("date");
   });
   
   it("validates", function() {

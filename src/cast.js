@@ -7,7 +7,7 @@
     
     for (var ndx = 0; ndx < fields.length; ndx++) {
       var field = fields[ndx];
-      definition[field] = definition[field] || ValueJS.defaults[field];
+      definition[field] = definition[field] || Cast.defaults[field];
     }
     
     REGISTRY[type] = definition;
@@ -21,7 +21,7 @@
     if (def)
       return def;
     else
-      throw new Error("ValueJS: Unknown type '" + type + "'");
+      throw new Error("Cast.: Unknown type '" + type + "'");
   }
   
   function types() {
@@ -41,7 +41,7 @@
     if (type) {
       return get(type);
     } else {
-      throw new Error("ValueJS: Unable to identify type of '" + string + "'");
+      throw new Error("Cast.: Unable to identify type of '" + string + "'");
     }
   }
   
@@ -57,7 +57,7 @@
     var result;
     
     if (typeof precedence == "undefined")
-      precedence = ValueJS.defaults.precedence || types();
+      precedence = Cast.defaults.precedence || types();
     
     for (var ndx = 0; ndx < precedence.length; ndx++) {
       var type = precedence[ndx];
@@ -83,7 +83,7 @@
     
     if (validate instanceof RegExp) {
       if (!string.match(validate))
-        errors = ValueJS.invalid;
+        errors = Cast.invalid;
     } else {
       errors = validate(string);
     }
@@ -112,10 +112,33 @@
     return this.definition.compare(this.parse(a), this.parse(b));
   }
   
-  Handler.prototype.sort = function(array, type) {
+  Handler.prototype.sort = function(array) {
     var self = this;
     return array.sort(function(a, b) { return self.compare(a, b); });
   }
+  
+  if (typeof _ != "undefined") {
+    Handler.prototype.each = function(list, iterator, context) {
+      var self = this;
+      
+      var _iterator = function(value, key, list) {
+        return iterator.call(context, self.parse(value), key, list);
+      };
+      
+      return _.each(list, _iterator, context);
+    }
+    
+    Handler.prototype.filter = function(list, iterator, context) {
+      var self = this;
+      
+      var _iterator = function(value, key, list) {
+        return iterator.call(context, self.parse(value), key, list);
+      };
+      
+      return _.filter(list, _iterator, context);
+    }
+  }
+  
   
   function as(type) {
     return new Handler(type, get(type));
@@ -143,7 +166,7 @@
   
   
   // define our public API
-  var ValueJS = {
+  var Cast = {
     defaults: {
       defaults: {},
       parse:    function(string) { return string; },
@@ -154,7 +177,7 @@
       precedence: null // null or array of type names in the preferred order
     },
     
-    // if you don't feel comfortable returning true when invalid, return ValueJS.invalid instead
+    // if you don't feel comfortable returning true when invalid, return Cast.invalid instead
     invalid: true,
     
     define: define,
@@ -165,11 +188,11 @@
   
   // export the library
   if (typeof module !== "undefined") {                                  // CommonJS module
-    module.exports = ValueJS;
+    module.exports = Cast;
   }
   
   if (typeof window !== "undefined" && typeof ender === "undefined") {  // Browser (without ender)
-    window.ValueJS = ValueJS;
+    window.Cast = Cast;
   }
   
   if (typeof define === "function" && define.amd) {                     // AMD module

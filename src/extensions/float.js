@@ -1,5 +1,5 @@
 (function() {
-  ValueJS.define('float', {
+  Cast.define('float', {
     defaults: {
       precision: 2
     },

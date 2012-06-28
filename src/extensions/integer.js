@@ -1,5 +1,5 @@
 (function() {
-  ValueJS.define('integer', {
+  Cast.define('integer', {
     validate: /^[+-]?\d+$/,
   
     parse: function(string) {

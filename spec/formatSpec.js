@@ -1,3 +1,3 @@
-describe("ValueJS.format", function() {
+describe("Cast.format", function() {
 
 });

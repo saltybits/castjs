@@ -1,7 +1,7 @@
 (function() {
   var regex = /(\d*(\.\d+)?)%/;
   
-  ValueJS.define('percentage', {
+  Cast.define('percentage', {
     defaults: {
       precision: 2
     },

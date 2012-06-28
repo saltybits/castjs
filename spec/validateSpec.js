@@ -9,14 +9,14 @@ describe("validate", function() {
   
   describe("type#validate", function() {
     it("can be a function", function() {
-      ValueJS.define("validationTest", {
+      Cast.define("validationTest", {
         validate: function(string) {
           if (!string.match())
-            return ValueJS.invalid;
+            return Cast.invalid;
         }
       });
       
-      var handler = ValueJS.as("validationTest");
+      var handler = Cast.as("validationTest");
       
       spyOn(handler.definition, "validate");
       handler.validate(string);
@@ -27,14 +27,14 @@ describe("validate", function() {
     });
     
     it("can be a regular expression", function() {
-      ValueJS.define("validationTest", { validate: regex });
+      Cast.define("validationTest", { validate: regex });
       
       // spyOn(string, "match").andReturn(true);
-      // ValueJS.as("validationTest").validate(string);
+      // Cast.as("validationTest").validate(string);
       // expect( string.match ).toHaveBeenCalledWith(regex);
       
       // can't get spyOn(string, "match") to work so here's a workaround
-      expect( ValueJS.as("validationTest").validate(string) ).not.toBeDefined()
+      expect( Cast.as("validationTest").validate(string) ).not.toBeDefined()
     });
   });
 });

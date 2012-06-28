@@ -2,7 +2,7 @@ describe("integer extension", function() {
   var handler;
   
   beforeEach(function() {
-    handler = ValueJS.as("integer");
+    handler = Cast.as("integer");
   });
   
   it("validates", function() {

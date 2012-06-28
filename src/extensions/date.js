@@ -1,13 +1,13 @@
 // Dependencies: moment.js
 (function() {
-  ValueJS.define('date', {
+  Cast.define('date', {
     defaults: {
       format: 'YYYY-MM-DD'
     },
   
     validate: function(string) {
       if (Date.parse(string) == NaN)
-        return ValueJS.invalid;
+        return Cast.invalid;
     },
   
     parse: function(string) {

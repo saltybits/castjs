@@ -2,7 +2,7 @@ describe("float extension", function() {
   var handler;
   
   beforeEach(function() {
-    handler = ValueJS.as("float");
+    handler = Cast.as("float");
   });
   
   it("validates", function() {

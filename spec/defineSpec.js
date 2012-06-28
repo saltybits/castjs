@@ -1,34 +1,34 @@
-describe("ValueJS.define", function() {
+describe("Cast.define", function() {
   it("should register the type definition under the given name", function() {
     var definition = {};
-    ValueJS.define('number', definition);
+    Cast.define('number', definition);
     
-    expect( ValueJS.get('number') ).toEqual(definition);
+    expect( Cast.get('number') ).toEqual(definition);
   });
   
   describe("provides default implementations for", function() {
     beforeEach(function() {
-      ValueJS.define('number', {});
+      Cast.define('number', {});
     });
     
     it("validate", function() {
-      expect( ValueJS.get('number').validate ).toEqual(ValueJS.defaults.validate);
+      expect( Cast.get('number').validate ).toEqual(Cast.defaults.validate);
     });
     
     it("parse", function() {
-      expect( ValueJS.get('number').parse ).toEqual(ValueJS.defaults.parse);
+      expect( Cast.get('number').parse ).toEqual(Cast.defaults.parse);
     });
     
     it("format", function() {
-      expect( ValueJS.get('number').format ).toEqual(ValueJS.defaults.format);
+      expect( Cast.get('number').format ).toEqual(Cast.defaults.format);
     });
     
     it("compare", function() {
-      expect( ValueJS.get('number').compare ).toEqual(ValueJS.defaults.compare);
+      expect( Cast.get('number').compare ).toEqual(Cast.defaults.compare);
     });
   });
   
   it("returns the newly defined handler", function() {
-    expect( ValueJS.define('test', {}) ).toEqual( ValueJS.as('test') )
+    expect( Cast.define('test', {}) ).toEqual( Cast.as('test') )
   });
 });

@@ -2,7 +2,7 @@ describe("percentage extension", function() {
   var handler;
   
   beforeEach(function() {
-    handler = ValueJS.as("percentage");
+    handler = Cast.as("percentage");
   });
   
   it("validates", function() {
