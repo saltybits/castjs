@@ -51,7 +51,7 @@ Cast.define("type", {
   format:   function(value, options) { },       // return the formatted value
   compare:  function(a, b) { ... }              // return -1, 0, or 1 (can be any negative or positive number)
 })
-
+```
 
 ## Contributing
 
