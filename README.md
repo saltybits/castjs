@@ -19,31 +19,12 @@ currency = Cast.as("currency")
 currency.parse("$1,2419.84")                // => 12419.84
 currency.format(325.83)                     // => "$325.83"
 currency.sort(["$2", "$1", "$0.50", "$4"])  // => ["$0.50", "$1", "$2", "$4"]
-
-// what other underscore functions could be useful here? looks like pretty much all the collection and array functions
-// all the methods below are working with parsed values
-currency.(each|map)
-currency.filter(...)
 ```
-
-### Working with values
-
-**validate**
-
-**parse**
-
-**format**
-
-**compare**
-
-**sort**
-```
-Cast.as("float").sort(["0.1", "19.83", "13.24"])
 
 ### Leveraging underscore.js
 
 Cast.js has a number of utility functions for working with lists of values, courtesy of [underscore](http://underscorejs.org/).
-Simply include underscore.js before including cast.js to enable them.
+Simply include `underscore.js` before including `cast.js` to enable them.
 
 ```
 // the "date" type is built on top of `moment.js`
@@ -58,11 +39,11 @@ The following underscore methods are supported:
 
 ### Adding your own data types
 ```
-Cast.define("dataType", {
-  validate: regex OR function(string) { ... },
-  parse:    function(string) { ... },
-  format:   function(value, options) { },
-  compare:  function(a, b) { ... }
+Cast.define("type", {
+  validate: regex OR function(string) { ... },  // return nothing on success, anything on error
+  parse:    function(string) { ... },           // return the parsed value
+  format:   function(value, options) { },       // return the formatted value
+  compare:  function(a, b) { ... }              // return -1, 0, or 1 (can be any negative or positive number)
 })
 
 
