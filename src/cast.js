@@ -230,7 +230,7 @@
   }
   
   if (typeof define === "function" && define.amd) {                     // AMD module
-    define("valuejs", [], function () {
+    define("cast", [], function () {
       return moment;
     });
   }

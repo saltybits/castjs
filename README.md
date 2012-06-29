@@ -1,4 +1,4 @@
-value.js
+cast.js
 ========
 
 A tiny javascript library for slicing and dicing formatted values.

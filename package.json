@@ -1,14 +1,14 @@
 {
-  "name": "value.js",
+  "name": "cast.js",
   "version": "0.0.1",
-  "description": "A tiny javascript library for validating, parsing, sorting, and displaying formatted values.",
-  "main": "value.js",
+  "description": "A tiny javascript library for slicing and dicing formatted values.",
+  "main": "cast.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/saltybits/value.js.git"
+    "url": "git://github.com/saltybits/castjs.git"
   },
   "keywords": [
-    "util value parse validate compare sort format"
+    "util cast value parse validate compare sort format underscore"
   ],
   "author": "Ryan Mohr <ryan@saltybits.co>",
   "license": "MIT"
