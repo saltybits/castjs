@@ -9,12 +9,18 @@ A tiny javascript library for slicing and dicing formatted values.
 
 Cast.js was designed to help you slice and dice formatted values (eg sorting and filtering strings as dates, working with complex formats like currencies, fractions, etc.).
 
-Cast.js has the ability to implicitly discover the type of the value (through validation), but it's much faster to specify
-the type if you know it ahead of time.
+Cast.js has the ability to implicitly discover the type of the value (through validation):
 
 ```
 Cast.typeOf("$11.13")        // => "currency"
 
+// can pass a precedence array to speed up the process if you have a rough idea of the type
+Cast.typeOf("$11.13", ["currency", "float", "integer"])
+```
+
+But it's much faster to specify the type if you know it ahead of time:
+
+```
 currency = Cast.as("currency")
 currency.parse("$1,2419.84")                // => 12419.84
 currency.format(325.83)                     // => "$325.83"
