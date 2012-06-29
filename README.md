@@ -41,7 +41,7 @@ Cast.as("date").filter(dates, function(moment) { return now.diff(moment, 'years'
 ```
 
 The following underscore methods are supported:
-`each` `map` `find` `filter` `reject` `all` `any` `max` `min` `sortBy` 
+`each` `map` `find` `filter` `reject` `all` `any` `max` `min` `sortBy`
 
 ### Adding your own data types
 ```
@@ -58,3 +58,11 @@ Cast.define("type", {
 Fork it, make sure tests are passing (simply load SpecRunner.html in your browser), then branch and hack away.  Make sure to add tests for any changes you make.
 
 Contributions are welcome!
+
+## History
+
+I'm horrible at logging version changes -- bug me if you see this section falling behind.
+
+- **0.0.1** - Initial release
+  - Basic API defined: `validate` `parse` `format` `compare`
+  - Includes support for underscore's `each` `map` `find` `filter` `reject` `all` `any` `max` `min` `sortBy`
