@@ -1,11 +1,11 @@
 /*
-CastJS v@VERSION
+CastJS v0.0.1
 http://github.com/saltybits/castjs
 
 Copyright 2013 Salty Bits
 Released under the MIT license
 
-Date: @DATE
+Date: 2013-05-03
 */
 
 

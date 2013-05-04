@@ -11,5 +11,14 @@
     "util cast value parse validate compare sort format underscore"
   ],
   "author": "Ryan Mohr <ryan@saltybits.co>",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "0.2.0",
+    "grunt-contrib-watch": "0.1.4",
+    "grunt-git-authors": "1.0.0",
+    "grunt-contrib-coffee": "~0.6.6",
+    "moment": "~2.0.0",
+    "grunt-contrib-jasmine": "~0.4.2"
+  }
 }

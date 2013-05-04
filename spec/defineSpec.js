@@ -1,34 +1,34 @@
 describe("Cast.define", function() {
   it("should register the type definition under the given name", function() {
     var definition = {};
-    Cast.define('number', definition);
+    Cast.define('foo', definition);
     
-    expect( Cast.get('number') ).toEqual(definition);
+    expect( Cast.get('foo') ).toEqual(definition);
   });
   
   describe("provides default implementations for", function() {
     beforeEach(function() {
-      Cast.define('number', {});
+      Cast.define('foo', {});
     });
     
     it("validate", function() {
-      expect( Cast.get('number').validate ).toEqual(Cast.defaults.validate);
+      expect( Cast.get('foo').validate ).toBeDefined();
     });
     
     it("parse", function() {
-      expect( Cast.get('number').parse ).toEqual(Cast.defaults.parse);
+      expect( Cast.get('foo').parse ).toBeDefined();
     });
     
     it("format", function() {
-      expect( Cast.get('number').format ).toEqual(Cast.defaults.format);
+      expect( Cast.get('foo').format ).toBeDefined();
     });
     
     it("compare", function() {
-      expect( Cast.get('number').compare ).toEqual(Cast.defaults.compare);
+      expect( Cast.get('foo').compare ).toBeDefined();
     });
   });
   
   it("returns the newly defined handler", function() {
-    expect( Cast.define('test', {}) ).toEqual( Cast.as('test') )
+    expect( Cast.define('foo', {}) ).toEqual( Cast.as('foo') )
   });
 });

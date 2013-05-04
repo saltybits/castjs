@@ -1,3 +1,0 @@
-describe("massage", function() {
-
-});

@@ -8,35 +8,37 @@
   <link rel="stylesheet" type="text/css" href="lib/jasmine-1.2.0/jasmine.css">
   <script type="text/javascript" src="lib/jasmine-1.2.0/jasmine.js"></script>
   <script type="text/javascript" src="lib/jasmine-1.2.0/jasmine-html.js"></script>
-  <script type="text/javascript" src="lib/underscore.js"></script>
 
-  <!-- include source files here... -->
-  <script type="text/javascript" src="spec/castSpec.js"></script>
+  <script type="text/javascript" src="lib/dependencies/underscore.js"></script>
+  <script type="text/javascript" src="lib/dependencies/moment.js"></script>
+
+  <!-- source -->
+  <script type="text/javascript" src="dist/cast.js"></script>
+  <!-- <script type="text/javascript" src="src/cast.min.js"></script> -->
+
+  <!-- specs -->
   <script type="text/javascript" src="spec/defineSpec.js"></script>
   <script type="text/javascript" src="spec/typeOfSpec.js"></script>
   <script type="text/javascript" src="spec/validateSpec.js"></script>
-  <script type="text/javascript" src="spec/parseSpec.js"></script>
-  <script type="text/javascript" src="spec/massageSpec.js"></script>
-  <script type="text/javascript" src="spec/handlerSpec.js"></script>
   <script type="text/javascript" src="spec/underscoreSpec.js"></script>
-
-  <!-- include spec files here... -->
-  <script type="text/javascript" src="src/cast.js"></script>
-  <!-- <script type="text/javascript" src="src/cast.min.js"></script> -->
   
-  <!-- testing extensions -->
-  <script type="text/javascript" src="spec/extensions/integerSpec.js"></script>
-  <script type="text/javascript" src="src/extensions/integer.js"></script>
+  <!-- testing types -->
+  <script type="text/javascript" src="spec/types/integerSpec.js"></script>
+  <script type="text/javascript" src="spec/types/floatSpec.js"></script>
+  <script type="text/javascript" src="spec/types/percentageSpec.js"></script>
+  <script type="text/javascript" src="spec/types/numberSpec.js"></script>
+  <script type="text/javascript" src="spec/types/dateSpec.js"></script>
+  <script type="text/javascript" src="spec/types/urlSpec.js"></script>
   
-  <script type="text/javascript" src="spec/extensions/floatSpec.js"></script>
-  <script type="text/javascript" src="src/extensions/float.js"></script>
+  <!--
+  <script type="text/javascript" src="src/types/integer.js"></script>
   
-  <script type="text/javascript" src="spec/extensions/percentageSpec.js"></script>
-  <script type="text/javascript" src="src/extensions/percentage.js"></script>
   
-  <script type="text/javascript" src="lib/moment.js"></script>
-  <script type="text/javascript" src="spec/extensions/dateSpec.js"></script>
-  <script type="text/javascript" src="src/extensions/date.js"></script>
+  <script type="text/javascript" src="src/types/float.js"></script>
+  
+  
+  <script type="text/javascript" src="src/types/date.js"></script>
+  -->
 
   <script type="text/javascript">
     (function() {

@@ -1,0 +1,6 @@
+{
+  "name": "castjs",
+  "version": "0.0.1",
+  "main": "./dist/cast.js",
+  "dependencies": {} // underscore?, momentjs?
+}

@@ -6,9 +6,9 @@ describe("percentage extension", function() {
   });
   
   it("validates", function() {
-    expect( handler.validate("0%") ).not.toBeDefined();
-    expect( handler.validate("50.1%") ).not.toBeDefined();
-    expect( handler.validate("100%") ).not.toBeDefined();
+    expect( handler.validate("0%") ).toBe(true);
+    expect( handler.validate("50.1%") ).toBe(true);
+    expect( handler.validate("100%") ).toBe(true);
   });
   
   it("parses", function() {

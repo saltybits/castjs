@@ -1,38 +1,19 @@
 describe("validate", function() {
-  var string,
-      regex;
-  
-  beforeEach(function() {
-    string = "123-4567";
-    regex = /^\d{3}-\d{4}$/;
-  });
-  
   describe("type#validate", function() {
     it("can be a function", function() {
-      Cast.define("validationTest", {
+      var handler = Cast.define("test", {
         validate: function(string) {
-          if (!string.match())
-            return Cast.invalid;
+          return string == "test";
         }
       });
       
-      var handler = Cast.as("validationTest");
-      
-      spyOn(handler.definition, "validate");
-      handler.validate(string);
-      
-      expect( handler.definition.validate ).toHaveBeenCalledWith(string);
+      expect(handler.validate("test")).toBe(true);
     });
     
     it("can be a regular expression", function() {
-      Cast.define("validationTest", { validate: regex });
+      var handler = Cast.define("test", { validate: /abc/ });
       
-      // spyOn(string, "match").andReturn(true);
-      // Cast.as("validationTest").validate(string);
-      // expect( string.match ).toHaveBeenCalledWith(regex);
-      
-      // can't get spyOn(string, "match") to work so here's a workaround
-      expect( Cast.as("validationTest").validate(string) ).not.toBeDefined()
+      expect(handler.validate("abc")).toBe(true);
     });
   });
 });

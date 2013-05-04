@@ -6,9 +6,9 @@ describe("integer extension", function() {
   });
   
   it("validates", function() {
-    expect( handler.validate("0") ).not.toBeDefined();
-    expect( handler.validate("-1") ).not.toBeDefined();
-    expect( handler.validate("0.0") ).toBeDefined();
+    expect( handler.validate("0") ).toBe(true);
+    expect( handler.validate("-1") ).toBe(true);
+    expect( handler.validate("0.0") ).toBe(false);
   });
   
   it("parses", function() {
